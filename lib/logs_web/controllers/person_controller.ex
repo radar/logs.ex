@@ -2,7 +2,6 @@ defmodule LogsWeb.PersonController do
   use LogsWeb, :controller
 
   alias Logs.People
-  alias Logs.People.Person
 
   def show(conn, %{"nick" => nick, "page" => page}) do
     person = People.by_nick(nick)

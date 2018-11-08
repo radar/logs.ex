@@ -20,7 +20,7 @@ defmodule Logs.MixProject do
   def application do
     [
       mod: {Logs.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :edeliver]
     ]
   end
 
@@ -46,7 +46,9 @@ defmodule Logs.MixProject do
       {:scrivener, "~> 2.5.0"},
       {:scrivener_ecto, "~> 2.0.0"},
       {:calendar, "~> 0.17.4"},
-      {:credo, "~> 0.10.2", only: :dev}
+      {:credo, "~> 0.10.2", only: :dev},
+      {:distillery, "~> 2.0"},
+      {:edeliver, "~> 1.6.0"},
     ]
   end
 

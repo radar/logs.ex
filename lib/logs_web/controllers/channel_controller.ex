@@ -2,8 +2,6 @@ defmodule LogsWeb.ChannelController do
   use LogsWeb, :controller
 
   alias Logs.Channels
-  alias Logs.Message
-  alias Logs.Repo
 
   def index(conn, _params) do
     render conn, "index.html", channels: Channels.visible

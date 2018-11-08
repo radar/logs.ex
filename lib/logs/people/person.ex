@@ -5,7 +5,7 @@ defmodule Logs.People.Person do
   schema "people" do
     field :nick
 
-    has_many :messages, Logs.Message
+    has_many :messages, Logs.Channels.Message
   end
 
   @doc false
