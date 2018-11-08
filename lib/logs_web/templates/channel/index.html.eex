@@ -2,6 +2,6 @@
 
 <ul>
   <%= for channel <- @channels do %>
-    <li><a href="<%= Routes.channel_path(@conn, :show, channel.name) %>"><%= channel.name %></li>
+    <li><a href="<%= Routes.channel_path(@conn, :show, channel.name) %>"><%= channel.name %></a></li>
   <% end %>
 </ul>
