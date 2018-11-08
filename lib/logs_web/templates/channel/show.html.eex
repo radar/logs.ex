@@ -1,0 +1,27 @@
+<a href='<%= Routes.channel_path(@conn, :index) %>' class="button">&laquo; Back to channel list</a>
+
+<h2>#<%= @channel.name %> - <%= @date |> Calendar.Strftime.strftime!("%d %B %Y") %></h2>
+
+<p>
+  <label for='show_events'>
+    <input id='show_events' type='checkbox'> Show joins + parts
+  </label>
+</p>
+
+<%= if @past_messages do %>
+  <a href='<%= Routes.channel_path(@conn, :show, @channel.name, date: @date |> yesterday |> pretty_date) %>' class="button">
+    &laquo; Back 1 day
+  </a>
+<% end %>
+
+<%= if @future_messages do %>
+  <a href='<%= Routes.channel_path(@conn, :show, @channel.name, date: @date |> tomorrow |> pretty_date) %>' class="button">
+    Forward 1 day &raquo;
+  </a>
+<% end %>
+
+<div id='messages'>
+  <%= for message <- @messages do %>
+    <%= render LogsWeb.MessageView, "message.html", conn: @conn, message: message, person: message.person, channel: @channel %>
+  <% end %>
+</div>

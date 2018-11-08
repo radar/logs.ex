@@ -1,0 +1,10 @@
+<a name='<%= @message.id %>'></a>
+<div class='message <%= @message.type %>'>
+  <% date = @message.created_at |> DateTime.to_date |> Date.to_iso8601 %>
+  <%= link to: Routes.channel_path(@conn, :show, @channel.name, date: date) <> "##{@message.id}" do %>
+    [<%= @message.created_at |> NaiveDateTime.to_erl |> Calendar.Strftime.strftime!("%H:%M:%S") %>]
+  <% end %>
+  
+  <a href='/p/<%= @person.nick %>'><%= @person.nick %></a>:
+  <%= @message.text %><br>
+</div>

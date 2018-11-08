@@ -1,0 +1,7 @@
+<h2>Channels</h2>
+
+<ul>
+  <%= for channel <- @channels do %>
+    <li><a href="<%= Routes.channel_path(@conn, :show, channel.name) %>"><%= channel.name %></li>
+  <% end %>
+</ul>

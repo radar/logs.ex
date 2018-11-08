@@ -1,0 +1,34 @@
+<span>
+  <h2>
+    <%= @person.nick %>
+  </h2>
+</span>
+
+<a href='/p/<%= @person.nick %>/activity'>Activity Graph</a>
+
+<p>
+  <label for='show_events'>
+    <input id='show_events' type='checkbox'> Show joins + parts
+  </label>
+</p>
+
+<p>
+  <%= if @page_number > 1 do %>
+  <a href="<%= Routes.person_path @conn, :show, @person.nick, page: @page_number-1 %>">&laquo; Prev</a>
+  |
+  <% end %>
+  Page <%= @page_number %> of <%= @total_pages %>
+  <%= if @page_number < @total_pages do %>
+  |
+  <a href="<%= Routes.person_path @conn, :show, @person.nick, page: @page_number+1%>"> Next &raquo;</a>
+  <% end %>
+</p>
+<div id='messages'>
+  <% message_groups = Enum.group_by(@messages, (fn (message) -> message.created_at |> Calendar.Strftime.strftime!("%Y-%m-%d") end)) |> Enum.to_list |> Enum.sort_by(fn ({group, _messages}) -> group end) |> Enum.reverse %>
+  <%= for { date, messages } <- message_groups do %>
+    <h3><%= date %></h3>
+    <%= for message <- Enum.sort_by(messages, fn(m) -> m.created_at |> NaiveDateTime.to_erl end) do %>
+      <%= render LogsWeb.MessageView, "message.html", conn: @conn, message: message, person: @person, channel: message.channel %>
+    <% end %>
+  <% end %>
+</div>
